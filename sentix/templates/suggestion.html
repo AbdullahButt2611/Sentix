@@ -1,0 +1,32 @@
+{% include 'header.html' %}
+
+    <div class="body-content">
+
+      <h1>Reviews and Suggestions</h1><br><br>
+
+      <h2>Client's Review</h2>
+
+      <h5 class="client-review">
+        {{review}}
+      </h5>
+      
+      <div class="flex sentiment-review-container">
+        <p class="sentiment-review {{sentiment}}">{{sentiment}}</p>
+      </div><br>
+
+      <h2>Our Suggestion</h2>
+
+      
+      {% if generated_error_text %}
+        <h5 class="client-review negative">
+            {{generated_error_text}}
+        </h5>
+      {% else %}
+        <div class="suggestion-container">
+            {{generated_text}}
+        </div>
+      {% endif %}
+
+    </div>
+
+{% include 'footer.html' %}

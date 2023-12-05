@@ -38,6 +38,7 @@ a {
   padding-left: 6rem;
   padding-top: 4rem;
   padding-right: 1rem;
+  padding-bottom: 3rem;
 }
 
 
@@ -344,11 +345,13 @@ tbody tr td:last-child
 
 tbody tr td.positive{
   color: #00fe00;
+  text-transform: capitalize;
 }
 
 
 tbody tr td.negative{
   color: #ee2800;
+  text-transform: capitalize;
 }
 
 tbody tr:hover td:first-child{
@@ -376,10 +379,19 @@ tbody tr:hover td:last-child{
   margin-bottom: 1rem;
 }
 
+.client-review.negative{
+  background-color: #f8d7da; 
+  border: 2px solid #721c24;
+  color: #721c24;
+  text-align: center;
+  font-size: 1rem;
+}
+
 .sentiment-review{
   padding: 1rem 2rem;
   display: inline-block;
   border-radius: 2rem;
+  text-transform: capitalize;
 }
 
 .sentiment-review-container{

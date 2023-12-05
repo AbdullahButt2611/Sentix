@@ -1,0 +1,32 @@
+{% include 'header.html' %}
+
+<div class="body-content">
+
+    <h1>Evaluation Summary</h1>
+
+    <div class="table-wrapper">
+
+        <table>
+          <thead>
+            <tr>
+              <th>Review</th>
+              <th>Sentiment</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for data_received in reviews_sent %}
+              <tr>
+                <td>{{data_received.review}}</td>
+                <td class="{{data_received.sentiment}}">{{data_received.sentiment}}</td>
+                <td><a href="{% url 'suggestion' data_received.sentiment data_received.review %}">Suggestion</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+{% include 'footer.html' %}

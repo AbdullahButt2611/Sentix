@@ -1,0 +1,56 @@
+{% include 'header.html' %}
+
+<div class="body-content">
+    <h1>Dashboard Overview</h1>
+      
+    <div class="dashboard-count-wrapper">
+
+        <div class="flex count-card">
+          <h4>Total Reviews</h4>
+          <div class="flex">
+            <h1>{{total_reviews}}</h1>
+            <i class="ri-pie-chart-2-fill"></i>
+          </div>
+        </div>
+
+        <div class="flex count-card">
+          <h4>Commendations</h4>
+          <div class="flex">
+            <h1>{{positive_reviews}}</h1>
+            <i class="ri-medal-2-line"></i>
+          </div>
+        </div>
+
+        <div class="flex count-card">
+          <h4>Criticism</h4>
+          <div class="flex">
+            <h1>{{negative_reviews}}</h1>
+            <i class="ri-skull-fill"></i>
+          </div>
+        </div>
+
+        {% if overall == "Good"  %}
+          <div class="flex count-card overall positive">
+            <h4>Overall Outlook</h4>
+            <div class="flex">
+              <h1>{{overall}}</h1>
+              <i class="ri-thumb-up-fill"></i>
+            </div>
+          </div>
+        {% else %}
+          <div class="flex count-card overall negative">
+            <h4>Overall Outlook</h4>
+            <div class="flex">
+              <h1>{{overall}}</h1>
+              <i class="ri-thumb-down-fill"></i> 
+            </div>
+          </div>
+        {% endif  %}
+
+    </div>
+
+    <h2>Analysis</h2>
+    
+</div>
+
+{% include 'footer.html' %}

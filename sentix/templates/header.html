@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sentix - Semantic Analysis App</title>
+
+    <!-- Remix Icons CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.6.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- Link for FavIcon -->
+    <link rel="shortcut icon" href="{% static 'assets/logo.svg' %}"  type="image/x-icon">
+
+    <!-- Link for Style Sheet -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <!-- Link for Script JS -->
+    <script src="{% static 'js/script.js' %}" defer></script>
+  </head>
+  <body>
+    <nav>
+      <div class="sidebar-header">
+        <a class="logo-wrapper">
+          <img src="{% static 'assets/logo.svg' %}" alt="Logo">
+          <h2 class="hidden">Sentix</h2>
+        </a>
+        <button class="toggle-btn">
+          <img src=" {% static 'assets/expand.svg' %}" alt="expand button">
+        </button>
+      </div>
+
+
+      <div class="sidebar-links">
+        <a href="{% url 'index' %}" class="link {% if request.path == '/'  %} active {% endif %}">
+          <img src="{% static 'assets/home.svg' %}" alt="">
+          <span class="hidden">Home</span>
+        </a>
+        <a href="{% url 'dashboard' %}" class="link {% if request.path == '/dashboard/'  %} active {% endif %}">
+          <img src="{% static 'assets/dashboard.svg' %}" alt="">
+          <span class="hidden">Dashboard</span>
+        </a>
+        <a href="{% url 'reviews' %}" class="link {% if request.path == '/reviews/'  %} active {% endif %}">
+          <img src="{% static 'assets/projects.svg' %}" alt="">
+          <span class="hidden">Reviews</span>
+        </a>
+        </li>
+        <a class="link">
+          <img src="{% static 'assets/tasks.svg' %}" alt="">
+          <span class="hidden">Tasks</span>
+        </a>
+      </div>
+
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-links">
+          <a class="link">
+            <img src="{% static 'assets/settings.svg' %}" alt="">
+            <span class="hidden">Settings</span>
+          </a>
+        </div>
+
+        <div class="user-profile">
+          <div class="user-avatar">
+            <img src="{% static 'assets/profile-pic.jpg' %}" alt="">
+          </div>
+          <div class="user-details hidden">
+            <p class="username">Mr Nobody</p>
+            <p class="user-email">mrnobody@gmail.com</p>
+          </div>
+        </div>
+      </div>
+    </nav>
