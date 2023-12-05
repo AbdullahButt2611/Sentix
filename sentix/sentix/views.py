@@ -1,7 +1,11 @@
 from django.shortcuts import render
+from django.templatetags.static import static
 
-import spacy, nltk, requests, openai, json, re
+import spacy, nltk, requests, openai, json, re, csv
 from nltk.sentiment import SentimentIntensityAnalyzer
+import pandas as pd
+
+import plotly.express as px
 
 
 
@@ -19,19 +23,9 @@ def dashboardPage(request):
 
     nltk.download('vader_lexicon')
 
+    csv = pd.read_csv('mixedReviews.csv')
 
-    mixed_reviews = [
-        "While the company's revenue increased, the rising expenses were a cause for concern among investors.",
-        "Despite a slight dip in profits, the management's strategic initiatives have positioned the company well for future growth.",
-        "Investors are skeptical about the recent stock market rally, fearing a potential correction in the coming months.",
-        "The bond market saw some turbulence, but savvy investors capitalized on the volatility to secure attractive yields.",
-        "The government's new tax policies received mixed reactions, with some applauding the simplification while others criticized the impact on businesses.",
-        "The IPO generated excitement initially, but concerns about the company's long-term sustainability led to a sell-off in the secondary market.",
-        "Analysts are divided on the cryptocurrency outlook, with some predicting a continued bull market and others warning of a potential bubble burst.",
-        "The central bank's decision to raise interest rates disappointed borrowers but pleased savers looking for higher returns on deposits.",
-        "Despite credit rating downgrades, the company's management remains optimistic about its ability to weather economic challenges.",
-        "Market volatility created opportunities for day traders, but long-term investors remained cautious, awaiting more stable conditions.",
-    ]
+    mixed_reviews = csv.iloc[:,0]
 
     data_dict['total_reviews'] = len(mixed_reviews)
     sentiments = []
@@ -46,6 +40,18 @@ def dashboardPage(request):
         data_dict['overall'] = "Good"
     else:
         data_dict['overall'] = "Bad"
+
+    graph_dict = {}
+    graph_dict['Positive'] = sentiments.count("positive")
+    graph_dict['Negative'] = sentiments.count("negative")
+    graph_dict['Neutral'] = sentiments.count("neutral")
+    
+    # distinct_sentiments = []
+    # [distinct_sentiments.append(x) for x in sentiments if x not in distinct_sentiments]
+
+    fig = px.bar(x=graph_dict.keys(), y=graph_dict.values(), title="Reviews Summary", height=400, color=graph_dict.keys(), color_discrete_sequence=["green", "red", "blue"],)
+    data_dict['chart'] = fig.to_html()
+
     
     return render(request, 'dashboard.html', data_dict)
 
@@ -56,18 +62,9 @@ def dashboardPage(request):
 def reviewsPage(request):
     data_dict = {}
 
-    mixed_reviews = [
-        "While the company's revenue increased, the rising expenses were a cause for concern among investors.",
-        "Despite a slight dip in profits, the management's strategic initiatives have positioned the company well for future growth.",
-        "Investors are skeptical about the recent stock market rally, fearing a potential correction in the coming months.",
-        "The bond market saw some turbulence, but savvy investors capitalized on the volatility to secure attractive yields.",
-        "The government's new tax policies received mixed reactions, with some applauding the simplification while others criticized the impact on businesses.",
-        "The IPO generated excitement initially, but concerns about the company's long-term sustainability led to a sell-off in the secondary market.",
-        "Analysts are divided on the cryptocurrency outlook, with some predicting a continued bull market and others warning of a potential bubble burst.",
-        "The central bank's decision to raise interest rates disappointed borrowers but pleased savers looking for higher returns on deposits.",
-        "Despite credit rating downgrades, the company's management remains optimistic about its ability to weather economic challenges.",
-        "Market volatility created opportunities for day traders, but long-term investors remained cautious, awaiting more stable conditions.",
-    ]
+    csv = pd.read_csv('mixedReviews.csv')
+
+    mixed_reviews = csv.iloc[:,0]
 
     data_dict['reviews_sent'] = []
 
@@ -93,6 +90,7 @@ def suggestionPage(request, sentiment, review):
     data_dict['review'] = review
 
     openai.api_key = "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"
+
     URL = "https://api.openai.com/v1/chat/completions"
 
     prompt = f""" '{review}' \n\nFor the review provided to you kindly provide what changes can be done in the system to make it better according to the review. Add new line character for each new line if points are there"""

@@ -296,6 +296,14 @@ body.active .toggle-btn {
   color: #856404;
 }
 
+.plotly-graph-div{
+  margin-top: 2rem;
+}
+
+.plotly-graph-div svg{
+  border-radius: 0.8rem;
+}
+
 /*#endregion  =======================    End Dashboard   =========================  */
 
 
