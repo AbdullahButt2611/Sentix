@@ -89,7 +89,7 @@ def suggestionPage(request, sentiment, review):
     data_dict['sentiment'] = sentiment
     data_dict['review'] = review
 
-    openai.api_key = "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"
+    openai.api_key = "sk-z2M8DafAkEkO8PyGPug2T3BlbkFJ0KnUBS8IaXLq3wocyfm2"
 
     URL = "https://api.openai.com/v1/chat/completions"
 
