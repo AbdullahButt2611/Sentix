@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
         {
-            "src" : "sentix/sentix/wsgi.py",
+            "src" : "sentix/wsgi.py",
             "use" : "@vercel/python",
             "config": {
                 "maxLambdaSize": "15mb",
@@ -24,7 +24,7 @@
         },
         {
             "src": "/(.*)",
-            "dest": "sentix/sentix/wsgi.py"
+            "dest": "sentix/wsgi.py"
         }
     ]
 }
