@@ -6,15 +6,14 @@
             "use" : "@vercel/python",
             "config": {
                 "maxLambdaSize": "15mb",
-                "runtime": "python3.12"
+                "runtime": "python3.9"
             }
         },
         {
             "src" : "build_files.sh",
             "use" : "@vercel/static-build",
             "config": {
-                "distDir": "static",
-                "runtime": "python3.12"
+                "distDir": "static"
             }
         }
     ],
